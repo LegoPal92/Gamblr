@@ -1,0 +1,5 @@
+1:
+  NAME: Bob
+  LOCATION: 123:45:678:world
+  INV_SIZE: 18
+  GUI:[{"Slot":0,"Item":{"MATERIAL": "DIRT", "NAME": "CRAPS", "CHANCE": 47, "REWARD": 120, "LORE": {"1": "PIZZA SAUCE", "2": "MARZAPAN", "3": "CREPES"}}}, {"Slot": 12,"Item":{"MATERIAL": "IRON_INGOT", "NAME": "Black Jack", "CHANCE": 13, "REWARD": 1200, "LORE": {"1": "Goal is to make 21", "2": "Without going", "3": "Over"}}}]

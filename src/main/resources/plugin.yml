@@ -1,0 +1,8 @@
+main: me.legopal92.Gamblr.Gamblr
+name: Gamblr
+version: 0.1a
+depend: [Vault]
+commands:
+  gamblr:
+    description: Base command for Gamblr plugin.
+    usage: /Gamblr
