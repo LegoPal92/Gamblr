@@ -25,7 +25,7 @@
     <orderEntry type="module-library">
       <library name="Maven: org.bukkit:craftbukkit:1.9.2">
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/BuildTools/craftbukkit-1.9.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/spigot-1.9.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
