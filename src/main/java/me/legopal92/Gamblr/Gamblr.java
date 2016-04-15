@@ -1,13 +1,13 @@
-package me.legopal92.Gamblr;
+package me.legopal92.gamblr;
 
-import me.legopal92.Gamblr.Commands.GamblrCommand;
-import me.legopal92.Gamblr.Commands.SubCommands.*;
-import me.legopal92.Gamblr.Economy.Bank;
-import me.legopal92.Gamblr.GUI.GUI;
-import me.legopal92.Gamblr.Listeners.PlayerListener;
-import me.legopal92.Gamblr.NPC.CustomEntityType;
-import me.legopal92.Gamblr.NPC.NPCDealer;
-import me.legopal92.Gamblr.Utils.LocationUtil;
+import me.legopal92.gamblr.commands.GamblrCommand;
+import me.legopal92.gamblr.commands.subCommands.*;
+import me.legopal92.gamblr.economy.Bank;
+import me.legopal92.gamblr.gui.GUI;
+import me.legopal92.gamblr.listeners.PlayerListener;
+import me.legopal92.gamblr.npc.CustomEntityType;
+import me.legopal92.gamblr.npc.NPCDealer;
+import me.legopal92.gamblr.utils.LocationUtil;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -47,11 +47,12 @@ public class Gamblr extends JavaPlugin {
             if (!setupEconomy()) {
                 getLogger().log(Level.SEVERE, "Vault is not enabled or found. Gamblr disabling.");
                 getServer().getPluginManager().disablePlugin(getInstance());
+                return;
             }
             new Bank();
         }
         {//Commands
-            getCommand("Gamblr").setExecutor(new GamblrCommand());
+            getCommand("gamblr").setExecutor(new GamblrCommand());
             new CreateCommand();
             new GUICommand();
             new HelpCommand();

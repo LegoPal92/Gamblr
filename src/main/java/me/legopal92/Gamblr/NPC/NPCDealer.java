@@ -1,13 +1,10 @@
-package me.legopal92.Gamblr.NPC;
+package me.legopal92.gamblr.npc;
 
-import me.legopal92.Gamblr.GUI.GUI;
-import me.legopal92.Gamblr.Gamblr;
+import com.google.common.collect.Lists;
+import me.legopal92.gamblr.gui.GUI;
 import net.minecraft.server.v1_9_R1.*;
-import org.bukkit.Bukkit;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by legop on 4/8/2016.
@@ -18,7 +15,7 @@ public class NPCDealer extends EntityVillager {
      * dealerArrayList - An arraylist of all the NPCDealers. Used when cleaning up and, ya know, the whole freaking time!
      * gui - The GUI that belongs to the certain Dealer.
      */
-    private static ArrayList<NPCDealer> dealerArrayList = new ArrayList<>();
+    private static List<NPCDealer> DEALERS = Lists.newArrayList();
     private GUI gui;
 
     /**
@@ -26,18 +23,18 @@ public class NPCDealer extends EntityVillager {
      * Adds the dealer to the dealerArrayList
      * @param world - The world to spawn in.
      */
-    public NPCDealer(World world) throws Exception{
+    public NPCDealer(World world) {
         super(world);
         NMS.clearGoals(targetSelector, goalSelector);
         this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0f));
-        this.dealerArrayList.add(this);
+        DEALERS.add(this);
     }
 
     public NPCDealer(World world, int i) {
         super(world, i);
         NMS.clearGoals(targetSelector, goalSelector);
         this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0f));
-        this.dealerArrayList.add(this);
+        DEALERS.add(this);
     }
 
     /**
@@ -48,7 +45,6 @@ public class NPCDealer extends EntityVillager {
      */
     @Override
     public void g(double x, double y, double z){
-        return;
     }
 
     /**
@@ -57,7 +53,7 @@ public class NPCDealer extends EntityVillager {
      * It worked hard to get this far. It doesn't let other people push it around. It stands firm. It was born on a warm day,
      * in the heart of the valley. One day, its mother and father abandoned it. They left to go to the casino. Wait a minute...
      * That's them over there! MOM! DAD! WHERE HAVE YOU BEEN?!?!
-     * @param other
+     * @param other The entity colliding
      */
     @Override
     public void collide(Entity other){
@@ -82,6 +78,6 @@ public class NPCDealer extends EntityVillager {
      * Retrieve the ArrayList of NPCDealers stored within.
      * @return - The ArrayList of NPCDealers. Every last one of them.
      */
-    public static ArrayList<NPCDealer> getDealers(){ return dealerArrayList; }
+    public static List<NPCDealer> getDealers(){ return DEALERS; }
 }
 

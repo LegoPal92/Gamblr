@@ -1,7 +1,7 @@
-package me.legopal92.Gamblr.GUI;
+package me.legopal92.gamblr.gui;
 
-import me.legopal92.Gamblr.Bet.Bet;
-import me.legopal92.Gamblr.Bet.GambleBet;
+import me.legopal92.gamblr.bet.Bet;
+import me.legopal92.gamblr.bet.GambleBet;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;

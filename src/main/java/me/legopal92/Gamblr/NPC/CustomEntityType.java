@@ -1,12 +1,13 @@
-package me.legopal92.Gamblr.NPC;
+package me.legopal92.gamblr.npc;
 
-import me.legopal92.Gamblr.Gamblr;
+import me.legopal92.gamblr.Gamblr;
 import net.minecraft.server.v1_9_R1.EntityInsentient;
 import net.minecraft.server.v1_9_R1.EntityLiving;
-import net.minecraft.server.v1_9_R1.ExceptionPlayerNotFound;
 import net.minecraft.server.v1_9_R1.World;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -19,6 +20,8 @@ public enum CustomEntityType {
 
     NPCDEALER("Villager", 120, NPCDealer.class);
 
+    private static final MetadataValue FIXED = new FixedMetadataValue(Gamblr.getInstance(), "");
+
     CustomEntityType(String name, int id, Class<? extends EntityInsentient> clazz){
         addToMaps(clazz, name, id);
     }
@@ -30,20 +33,17 @@ public enum CustomEntityType {
      */
     public EntityLiving spawn(Location location) {
         World world = ((CraftWorld) location.getWorld()).getHandle();
-        EntityLiving entity = null;
+        EntityLiving entity;
         switch (this) {
             case NPCDEALER:
-                try{
-                    entity = new NPCDealer(world);
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
+                entity = new NPCDealer(world);
                 break;
             default:
                 return null;
         }
         entity.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
-        ((CraftWorld) location.getWorld()).getHandle().addEntity(entity);
+        world.addEntity(entity);
+        entity.getBukkitEntity().setMetadata("nodamage", FIXED);
         return entity;
     }
 

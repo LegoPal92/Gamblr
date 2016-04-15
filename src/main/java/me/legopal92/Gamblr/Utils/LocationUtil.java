@@ -1,6 +1,6 @@
-package me.legopal92.Gamblr.Utils;
+package me.legopal92.gamblr.utils;
 
-import me.legopal92.Gamblr.Gamblr;
+import me.legopal92.gamblr.Gamblr;
 import org.bukkit.Location;
 
 /**

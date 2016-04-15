@@ -1,10 +1,10 @@
-package me.legopal92.Gamblr.Listeners;
+package me.legopal92.gamblr.listeners;
 
-import me.legopal92.Gamblr.Bet.GambleBet;
-import me.legopal92.Gamblr.Economy.Bank;
-import me.legopal92.Gamblr.GUI.GUI;
-import me.legopal92.Gamblr.GUI.GUIItem;
-import me.legopal92.Gamblr.NPC.NPCDealer;
+import me.legopal92.gamblr.bet.GambleBet;
+import me.legopal92.gamblr.economy.Bank;
+import me.legopal92.gamblr.gui.GUI;
+import me.legopal92.gamblr.gui.GUIItem;
+import me.legopal92.gamblr.npc.NPCDealer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

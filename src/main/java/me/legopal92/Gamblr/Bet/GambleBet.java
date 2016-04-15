@@ -1,7 +1,7 @@
-package me.legopal92.Gamblr.Bet;
+package me.legopal92.gamblr.bet;
 
-import me.legopal92.Gamblr.Economy.Bank;
-import me.legopal92.Gamblr.Gamblr;
+import me.legopal92.gamblr.economy.Bank;
+import me.legopal92.gamblr.Gamblr;
 import org.bukkit.Effect;
 import org.bukkit.entity.Player;
 

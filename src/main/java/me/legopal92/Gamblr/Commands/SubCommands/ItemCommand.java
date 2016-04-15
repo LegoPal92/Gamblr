@@ -1,7 +1,7 @@
-package me.legopal92.Gamblr.Commands.SubCommands;
+package me.legopal92.gamblr.commands.subCommands;
 
-import me.legopal92.Gamblr.Commands.GamblrCommand;
-import me.legopal92.Gamblr.GUI.GUIItem;
+import me.legopal92.gamblr.commands.GamblrCommand;
+import me.legopal92.gamblr.gui.GUIItem;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.command.Command;

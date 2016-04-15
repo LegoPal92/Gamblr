@@ -1,10 +1,10 @@
-package me.legopal92.Gamblr.Commands.SubCommands;
+package me.legopal92.gamblr.commands.subCommands;
 
-import me.legopal92.Gamblr.Commands.GamblrCommand;
-import me.legopal92.Gamblr.GUI.GUI;
-import me.legopal92.Gamblr.Gamblr;
-import me.legopal92.Gamblr.NPC.CustomEntityType;
-import me.legopal92.Gamblr.NPC.NPCDealer;
+import me.legopal92.gamblr.commands.GamblrCommand;
+import me.legopal92.gamblr.gui.GUI;
+import me.legopal92.gamblr.Gamblr;
+import me.legopal92.gamblr.npc.CustomEntityType;
+import me.legopal92.gamblr.npc.NPCDealer;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

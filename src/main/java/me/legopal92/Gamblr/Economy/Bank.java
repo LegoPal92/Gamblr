@@ -1,6 +1,6 @@
-package me.legopal92.Gamblr.Economy;
+package me.legopal92.gamblr.economy;
 
-import me.legopal92.Gamblr.Gamblr;
+import me.legopal92.gamblr.Gamblr;
 
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
-package me.legopal92.Gamblr.GUI;
+package me.legopal92.gamblr.gui;
 
-import me.legopal92.Gamblr.Gamblr;
+import me.legopal92.gamblr.Gamblr;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.json.simple.JSONArray;

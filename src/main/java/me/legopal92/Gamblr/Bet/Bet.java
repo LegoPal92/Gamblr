@@ -1,4 +1,4 @@
-package me.legopal92.Gamblr.Bet;
+package me.legopal92.gamblr.bet;
 
 /**
  * Created by legop on 4/8/2016.

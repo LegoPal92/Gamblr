@@ -1,4 +1,4 @@
-package me.legopal92.Gamblr.NPC;
+package me.legopal92.gamblr.npc;
 
 import net.minecraft.server.v1_9_R1.PathfinderGoalSelector;
 
@@ -21,7 +21,7 @@ public class NMS {
             f = clazz.getDeclaredField(field);
             f.setAccessible(true);
         } catch (Exception ignored) {
-            System.out.println(ignored);
+            ignored.printStackTrace();
         }
         return f;
     }

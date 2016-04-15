@@ -1,4 +1,4 @@
-package me.legopal92.Gamblr.Commands;
+package me.legopal92.gamblr.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
