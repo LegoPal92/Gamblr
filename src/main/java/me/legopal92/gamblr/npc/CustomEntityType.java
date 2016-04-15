@@ -39,7 +39,8 @@ public enum CustomEntityType {
                 entity = new NPCDealer(world);
                 break;
             default:
-                return null;
+                entity = new NPCDealer(world);
+                break;
         }
         entity.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
         world.addEntity(entity);
