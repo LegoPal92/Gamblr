@@ -1,13 +1,9 @@
 package me.legopal92.Gamblr.NPC;
 
 import me.legopal92.Gamblr.GUI.GUI;
-import me.legopal92.Gamblr.Gamblr;
 import net.minecraft.server.v1_9_R1.*;
-import org.bukkit.Bukkit;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Created by legop on 4/8/2016.
@@ -26,7 +22,7 @@ public class NPCDealer extends EntityVillager {
      * Adds the dealer to the dealerArrayList
      * @param world - The world to spawn in.
      */
-    public NPCDealer(World world) throws Exception{
+    public NPCDealer(World world){
         super(world);
         NMS.clearGoals(targetSelector, goalSelector);
         this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0f));

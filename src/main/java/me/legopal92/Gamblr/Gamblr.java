@@ -1,9 +1,13 @@
 package me.legopal92.Gamblr;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import me.legopal92.Gamblr.Commands.GamblrCommand;
 import me.legopal92.Gamblr.Commands.SubCommands.*;
 import me.legopal92.Gamblr.Economy.Bank;
 import me.legopal92.Gamblr.GUI.GUI;
+import me.legopal92.Gamblr.GUI.ItemSerializer;
 import me.legopal92.Gamblr.Listeners.PlayerListener;
 import me.legopal92.Gamblr.NPC.CustomEntityType;
 import me.legopal92.Gamblr.NPC.NPCDealer;
@@ -12,10 +16,9 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
@@ -30,6 +33,8 @@ public class Gamblr extends JavaPlugin {
 
     private static Economy econ;
     private static Gamblr inst;
+    public static Gson gson = new GsonBuilder().setPrettyPrinting()
+            .registerTypeAdapter(ItemStack.class, new ItemSerializer()).create();
 
     @Override
     public void onEnable() {
@@ -167,9 +172,8 @@ public class Gamblr extends JavaPlugin {
             String location = dc.getString(s + ".LOCATION");
             int inv_size = dc.getInt(s + ".INV_SIZE");
             String gui = dc.getString(s + ".GUI");
-            JSONParser jsp = new JSONParser();
-            JSONObject jso = (JSONObject) jsp.parse(gui);
-            GUI g = GUI.getGUIFromJson(jso);
+            JsonObject jso = new JsonObject();
+            GUI g = Gamblr.gson.fromJson(gui, GUI.class);
             Location l = LocationUtil.parseString(location);
 
             NPCDealer dealer = (NPCDealer) CustomEntityType.NPCDEALER.spawn(l);

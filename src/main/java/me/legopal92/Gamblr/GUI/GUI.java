@@ -3,10 +3,6 @@ package me.legopal92.Gamblr.GUI;
 import me.legopal92.Gamblr.Gamblr;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +29,7 @@ public class GUI {
 
     private Inventory gui = null;
     private String name;
-    private long slots;
+    private int slots;
     private GUIItem[] items;
 
     /**
@@ -42,7 +38,7 @@ public class GUI {
      * @param slots - The amount of slots in the inventory.
      * @param guiItem - The items in the inventory.
      */
-    public GUI(String name, long slots, GUIItem[] guiItem){
+    public GUI(String name, int slots, GUIItem[] guiItem){
         this.gui =  Gamblr.getInstance().getServer().createInventory(null,(int) slots, name);
         this.name = name;
         this.slots = slots;
@@ -78,7 +74,7 @@ public class GUI {
      * Seriously. This is one of the most obvious methods I have.
      * @return - The amount of slots in the inventory.
      */
-    public long getSlots(){ return slots; }
+    public int getSlots(){ return slots; }
 
     /**
      * Populates the inventory with the @link{GUIItem}s on craetion.
@@ -107,48 +103,6 @@ public class GUI {
             }
         }
         return null;
-    }
-
-    /**
-     * Overrides the toString() method of Object to provide me with a serialized JSON string to save to a config.
-     * @return - A serialized JSON string.
-     */
-    @Override
-    public String toString(){
-        JSONObject jso = new JSONObject();
-        jso.put("name", name);
-        jso.put("slots", slots);
-        JSONArray jsa = new JSONArray();
-        for(int i =0; i <items.length; i++){
-            GUIItem gi = items[i];
-            jsa.add(i, gi.toString());
-        }
-        jso.put("items", jsa);
-        return jso.toJSONString();
-    }
-
-    /**
-     * Load a GUI from JSON, which was stored in a config.
-     * @param jso - The JSONObject that was the stored string.
-     * @return - The GUI loaded.
-     */
-    public static GUI getGUIFromJson(JSONObject jso) throws ParseException{
-        String name = (String)jso.get("name");
-        long slots = (Long)jso.get("slots");
-        JSONArray array = (JSONArray)jso.get("items");
-        GUIItem[] items = new GUIItem[array.size()];
-        for (int i =0; i < array.size(); i++){
-            System.out.println(array.get(i));
-            String json = (String) array.get(i);
-            JSONParser jsp = new JSONParser();
-            JSONObject jsonObject = (JSONObject)jsp.parse(json);
-            GUIItem item = GUIItem.fromJSON(jsonObject);
-            items[i] = item;
-//            JSONObject jsonObject = (String) array.get(i);
-//            GUIItem item = GUIItem.fromJSON(jsonObject);
-//            items[i] = item;
-        }
-        return new GUI(name, slots, items);
     }
 
     /**

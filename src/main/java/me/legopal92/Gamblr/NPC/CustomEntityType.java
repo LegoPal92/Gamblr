@@ -3,7 +3,6 @@ package me.legopal92.Gamblr.NPC;
 import me.legopal92.Gamblr.Gamblr;
 import net.minecraft.server.v1_9_R1.EntityInsentient;
 import net.minecraft.server.v1_9_R1.EntityLiving;
-import net.minecraft.server.v1_9_R1.ExceptionPlayerNotFound;
 import net.minecraft.server.v1_9_R1.World;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
@@ -33,17 +32,13 @@ public enum CustomEntityType {
         EntityLiving entity = null;
         switch (this) {
             case NPCDEALER:
-                try{
-                    entity = new NPCDealer(world);
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
+                entity = new NPCDealer(world);
                 break;
             default:
                 return null;
         }
         entity.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
-        ((CraftWorld) location.getWorld()).getHandle().addEntity(entity);
+        world.addEntity(entity);
         return entity;
     }
 

@@ -2,7 +2,6 @@ package me.legopal92.Gamblr.Commands.SubCommands;
 
 import me.legopal92.Gamblr.Commands.GamblrCommand;
 import me.legopal92.Gamblr.GUI.GUIItem;
-import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -58,8 +57,7 @@ public class ItemCommand extends GamblrCommand {
         gi.setName(name);
 
         if (!effect.equals(null)){
-            Effect effect1 = Effect.valueOf(effect.toUpperCase());
-            gi.setEffect(effect1);
+            gi.setEffect(effect);
         }
         if (playerItems.containsKey(player.getUniqueId())){
             ArrayList<GUIItem> items = playerItems.get(player.getUniqueId());

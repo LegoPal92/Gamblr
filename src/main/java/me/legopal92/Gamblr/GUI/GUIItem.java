@@ -1,14 +1,14 @@
 package me.legopal92.Gamblr.GUI;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import me.legopal92.Gamblr.Bet.Bet;
 import me.legopal92.Gamblr.Bet.GambleBet;
+import me.legopal92.Gamblr.Gamblr;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +28,19 @@ public class GUIItem {
      * cost - The cost of the bet.
      * name - The name of the item.
      */
-    private List<Bet> bets;
+    private transient List<Bet> bets;
 
-    private ItemStack itemStack;
-    private int slot, chance;
-    private int reward, cost;
-    private String name;
-    private Effect effect;
+    public transient ItemStack itemStack;
+    public int slot, chance;
+    public int reward, cost;
+    public String name;
+    public String effect;
+    public String jsonItemStack;
 
+
+    public GUIItem(){
+
+    }
     /**
      * Create a GUIItem.
      * @param is - The Bukkit ItemStack.
@@ -45,6 +50,7 @@ public class GUIItem {
         this.itemStack = is;
         this.slot = slot;
         this.bets = new ArrayList<Bet>();
+        jsonItemStack = getItemStackAsJson().toString();
     }
 
     public ItemStack getBukkitItem(){
@@ -74,9 +80,9 @@ public class GUIItem {
         getBukkitItem().setItemMeta(im);
     }
 
-    public void setEffect(Effect effect){ this.effect = effect; }
+    public void setEffect(String effect){ this.effect = effect; }
 
-    public Effect getEffect(){ return effect; }
+    public Effect getEffect(){ return Effect.valueOf(effect); }
 
     /**
      * Initiates the bet by creating a GambleBet object and adding it to the list.
@@ -109,61 +115,15 @@ public class GUIItem {
 
     public List<Bet> getBets(){ return bets; }
 
-    /**
-     * Overrides the toString() method of Object to provide me with a serialized JSON string to save to a config.
-     * @return - A serialized JSON string.
-     */
-    @Override
-    public String toString(){
-        JSONObject jso = new JSONObject();
-        jso.put("name", name);
-        jso.put("slot", slot);
-        jso.put("chance", chance);
-        jso.put("reward", reward);
-        jso.put("cost", cost);
-        jso.put("material", getBukkitItem().getType().name());
-        jso.put("amount", getBukkitItem().getAmount());
-        JSONArray array = new JSONArray();
-        if (getLore() != null) {
-            for (int i = 0; i < getLore().size(); i++) {
-                array.add(i, getLore().get(i));
-            }
-        }
-        jso.put("lore", array);
-        jso.put("effect", effect.name());
-
-        return jso.toJSONString();
+    public JsonObject getItemStackAsJson(){
+        JsonObject jso = new JsonObject();
+        jso.addProperty("name", name);
+        jso.addProperty("type", getBukkitItem().getType().name());
+        JsonArray lore = Gamblr.gson.toJsonTree(getLore()).getAsJsonArray();
+        jso.add("lore", lore);
+        jso.addProperty("amt", getBukkitItem().getAmount());
+        jso.addProperty("data", getBukkitItem().getData().getData());
+        return jso;
     }
 
-    /**
-     * Load a GUIItem from JSON, which was stored in a config.
-     * @param jso - The JSONObject that was the stored string.
-     * @return - The GUIItem loaded.
-     */
-    public static GUIItem fromJSON(JSONObject jso){
-        String name = (String)jso.get("name");
-        long slot = (Long)jso.get("slot");
-        long chance = (Long)jso.get("chance");
-        long reward = (Long)jso.get("reward");
-        long cost = (Long)jso.get("cost");
-        Material m = Material.getMaterial((String)jso.get("material"));
-        long amount = (Long)jso.get("amount");
-        JSONArray array = (JSONArray)jso.get("lore");
-        Effect effect = Effect.valueOf((String)jso.get("effect"));
-        List<String> lore = new ArrayList<>();
-        for (int i = 0; i <array.size(); i++){
-            lore.add(i, (String)array.get(i));
-        }
-
-        ItemStack is = new ItemStack(m, (int)amount);
-        GUIItem guiItem = new GUIItem(is, (int)slot);
-        guiItem.setLore(lore);
-        guiItem.setChance((int)chance);
-        guiItem.setCost((int)cost);
-        guiItem.setName(name);
-        guiItem.setReward((int)reward);
-        guiItem.setEffect(effect);
-
-        return guiItem;
-    }
 }
