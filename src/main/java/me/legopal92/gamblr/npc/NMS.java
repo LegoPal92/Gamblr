@@ -1,9 +1,9 @@
 package me.legopal92.gamblr.npc;
 
-import net.minecraft.server.v1_9_R1.PathfinderGoalSelector;
+import net.minecraft.server.v1_8_R3.PathfinderGoalSelector;
 
 import java.lang.reflect.Field;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by Timothy Andis
@@ -37,7 +37,7 @@ public class NMS {
         }
         for (PathfinderGoalSelector selector : goalSelectors) {
             try {
-                Set<?> list = (Set<?>) NMS.GOAL_FIELD.get(selector);
+                List<?> list = (List<?>) NMS.GOAL_FIELD.get(selector);
                 list.clear();
             } catch (Exception ignored) {
                 ignored.printStackTrace();

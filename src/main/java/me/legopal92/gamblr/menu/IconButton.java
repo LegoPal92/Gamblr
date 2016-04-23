@@ -8,6 +8,8 @@ import org.bukkit.inventory.ItemStack;
  */
 public class IconButton extends Button {
 
+    private int slot;
+
     public IconButton(ItemStack item) {
         super(item);
     }
@@ -15,5 +17,13 @@ public class IconButton extends Button {
     @Override
     public void onClick(Player player) {
 
+    }
+
+    public int getSlot(){
+        return slot;
+    }
+
+    public void setSlot(int slot){
+        this.slot = slot;
     }
 }

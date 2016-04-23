@@ -1,9 +1,13 @@
 package me.legopal92.gamblr.bet;
 
-import me.legopal92.gamblr.economy.Bank;
 import me.legopal92.gamblr.Gamblr;
+import me.legopal92.gamblr.economy.Bank;
+import me.legopal92.gamblr.utils.MessageConfig;
 import org.bukkit.Effect;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 
 import java.util.Random;
 import java.util.UUID;
@@ -24,9 +28,11 @@ public class GambleBet implements Bet {
     private int cost;
     private int chance;
     private int prize;
+    private int radius;
     private UUID player;
     private Random r;
     private Effect e;
+    private PotionEffect pe;
 
     /**
      *
@@ -35,13 +41,15 @@ public class GambleBet implements Bet {
      * @param prize - The prize for winning.
      * @param player - The player that this bet belongs to.
      */
-    public GambleBet(int cost, int chance, int prize, UUID player, Effect effect){
+    public GambleBet(int cost, int chance, int prize, int radius, UUID player, Effect effect, PotionEffect potionEffect){
         this.chance = chance;
         this.cost = cost;
         this.player = player;
         this.prize = prize;
+        this.radius = radius;
         this.r = new Random(System.currentTimeMillis());
         this.e = effect;
+        this.pe = potionEffect;
     }
 
     /**
@@ -77,7 +85,7 @@ public class GambleBet implements Bet {
     @Override
     public void win() {
         Player bp = Gamblr.getInstance().getServer().getPlayer(player);
-        bp.sendMessage("Congratulations! You have won: " + prize());
+        bp.sendMessage(MessageConfig.WIN.replace("%MONEY%", prize + ""));
         if (e != null){
             bp.getWorld().playEffect(bp.getLocation(), e, 0);
         }
@@ -90,7 +98,17 @@ public class GambleBet implements Bet {
      */
     @Override
     public void lose() {
-        Gamblr.getInstance().getServer().getPlayer(player).sendMessage("I'm sorry, you have lost, better luck next time!");
+        Gamblr.getInstance().getServer().getPlayer(player).sendMessage(MessageConfig.LOSE);
+        Player p = Gamblr.getInstance().getServer().getPlayer(player);
+        if (pe == null){
+            return;
+        }
+        for (Entity e : p.getNearbyEntities(radius, radius, radius)){
+            if (e.getType() != EntityType.PLAYER){
+                continue;
+            }
+            pe.apply((Player)e);
+        }
     }
 
     /**
@@ -117,4 +135,6 @@ public class GambleBet implements Bet {
      */
     @Override
     public int prize() { return prize; }
+
+    public PotionEffect getPotionEffect() { return pe; }
 }

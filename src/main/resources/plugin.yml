@@ -1,4 +1,4 @@
-main: me.legopal92.Gamblr.Gamblr
+main: me.legopal92.gamblr.Gamblr
 name: Gamblr
 version: 0.1a
 depend: [Vault]

@@ -13,7 +13,7 @@ public class Bank {
      * Craetes a bank with Vault.
      */
     public Bank(){
-        Gamblr.getEconomy().createBank("Gamblr", "Gamblr");
+        Gamblr.getInstance().getEconomy().createBank("Gamblr", "Gamblr");
     }
 
     /**
@@ -30,7 +30,7 @@ public class Bank {
      * @param startingBalance - The starting balance.
      */
     public static void join(UUID u, double startingBalance){
-        Gamblr.getEconomy().depositPlayer(Gamblr.getInstance().getServer().getOfflinePlayer(u), "Gamblr", startingBalance);
+        Gamblr.getInstance().getEconomy().depositPlayer(Gamblr.getInstance().getServer().getOfflinePlayer(u), "Gamblr", startingBalance);
     }
 
     /**
@@ -40,12 +40,12 @@ public class Bank {
      * @return - true if the person has enough money.
      */
     public static boolean has(UUID u, double h){
-        return Gamblr.getEconomy().has(Gamblr.getInstance().getServer().getOfflinePlayer(u), "Gamblr", h);
+        return Gamblr.getInstance().getEconomy().has(Gamblr.getInstance().getServer().getOfflinePlayer(u), "Gamblr", h);
 
     }
 
     public static boolean isInBank(UUID u){
-        return Gamblr.getEconomy().hasAccount(Gamblr.getInstance().getServer().getOfflinePlayer(u), "Gamblr");
+        return Gamblr.getInstance().getEconomy().hasAccount(Gamblr.getInstance().getServer().getOfflinePlayer(u), "Gamblr");
     }
 
     /**
@@ -54,7 +54,7 @@ public class Bank {
      * @param d - The amount to deposit.
      */
     public static void deposit(UUID u, double d){
-        Gamblr.getEconomy().depositPlayer(Gamblr.getInstance().getServer().getOfflinePlayer(u), "Gamblr", d);
+        Gamblr.getInstance().getEconomy().depositPlayer(Gamblr.getInstance().getServer().getOfflinePlayer(u), "Gamblr", d);
     }
 
     /**
@@ -63,6 +63,6 @@ public class Bank {
      * @param d - The amount to withdraw.
      */
     public static void withdraw(UUID u, double d){
-        Gamblr.getEconomy().withdrawPlayer(Gamblr.getInstance().getServer().getOfflinePlayer(u), d);
+        Gamblr.getInstance().getEconomy().withdrawPlayer(Gamblr.getInstance().getServer().getOfflinePlayer(u), d);
     }
 }

@@ -1,11 +1,11 @@
 package me.legopal92.gamblr.npc;
 
 import me.legopal92.gamblr.Gamblr;
-import net.minecraft.server.v1_9_R1.EntityInsentient;
-import net.minecraft.server.v1_9_R1.EntityLiving;
-import net.minecraft.server.v1_9_R1.World;
+import net.minecraft.server.v1_8_R3.EntityInsentient;
+import net.minecraft.server.v1_8_R3.EntityLiving;
+import net.minecraft.server.v1_8_R3.World;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 
@@ -53,8 +53,8 @@ public enum CustomEntityType {
      * Add the custom mob to the maps.
      */
     private static void addToMaps(Class clazz, String name, int id) {
-        ((Map) getPrivateField("d", net.minecraft.server.v1_9_R1.EntityTypes.class, null)).put(clazz, name);
-        ((Map) getPrivateField("f", net.minecraft.server.v1_9_R1.EntityTypes.class, null)).put(clazz, id);
+        ((Map) getPrivateField("d", net.minecraft.server.v1_8_R3.EntityTypes.class, null)).put(clazz, name);
+        ((Map) getPrivateField("f", net.minecraft.server.v1_8_R3.EntityTypes.class, null)).put(clazz, id);
     }
 
     public static Object getPrivateField(String fieldName, Class clazz, Object object) {

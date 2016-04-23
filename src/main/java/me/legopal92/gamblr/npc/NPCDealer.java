@@ -1,8 +1,9 @@
 package me.legopal92.gamblr.npc;
 
 import com.google.common.collect.Lists;
-import me.legopal92.gamblr.gui.GUI;
-import net.minecraft.server.v1_9_R1.*;
+import me.legopal92.gamblr.Gamblr;
+import me.legopal92.gamblr.menu.MainMenu;
+import net.minecraft.server.v1_8_R3.*;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class NPCDealer extends EntityVillager {
      * gui - The GUI that belongs to the certain Dealer.
      */
     private static List<NPCDealer> DEALERS = Lists.newArrayList();
-    private GUI gui;
+    private MainMenu gui;
 
     /**
      * Creates the NPCDealer entity with a sole goal of looking at players.
@@ -64,15 +65,16 @@ public class NPCDealer extends EntityVillager {
      * Sets the gui for the Dealer.
      * @param gui
      */
-    public void setGUI(GUI gui){
+    public void setGUI(MainMenu gui){
         this.gui = gui;
+        Gamblr.getInstance().getDealerConfig().set(this);
     }
 
     /**
      * Obvious method purpose is obvious.
      * @return - The gui that belongs to this dealer. Why do you want it? It belongs to me. I don't want you to have this.. Don't do this to me. Please?
      */
-    public GUI getGui(){ return gui; }
+    public MainMenu getGui(){ return gui; }
 
     /**
      * Retrieve the ArrayList of NPCDealers stored within.

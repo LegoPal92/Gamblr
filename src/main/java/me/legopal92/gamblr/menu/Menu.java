@@ -19,11 +19,14 @@ public abstract class Menu {
     protected static final Button[] EMPTY = new Button[45];
     protected static Map<UUID, Menu> MENUS = new HashMap<>();
     private String name;
+    private int size;
+    private boolean set;
     protected Button[] buttons;
 
-    public Menu(String name) {
+    public Menu(String name, int size) {
         this.name = name;
         this.buttons = EMPTY;
+        this.size = size;
     }
 
     public static Menu get(UUID name) {
@@ -52,7 +55,7 @@ public abstract class Menu {
      * @param player The player who we wish to show the GUI to
      */
     public void open(Player player) {
-        setButtons(setUp());
+
 
         if (MENUS.get(player.getUniqueId()) != null) {
             MENUS.remove(player.getUniqueId());
@@ -60,17 +63,18 @@ public abstract class Menu {
 
         MENUS.put(player.getUniqueId(), this);
 
-        int size = (buttons.length + 8) / 9 * 9;
+        //int size = (buttons.length + 8) / 9 * 9;
         Inventory inventory = Bukkit.createInventory(player, size, getName());
+        if (set) {
+            for (int i = 0; i < buttons.length; i++) {
+                if (buttons[i] == null) {
+                    continue;
+                }
 
-        for (int i = 0; i < buttons.length; i++) {
-            if (buttons[i] == null) {
-                continue;
+                ItemStack item = buttons[i].getItemStack();
+
+                inventory.setItem(i, item);
             }
-
-            ItemStack item = buttons[i].getItemStack();
-
-            inventory.setItem(i, item);
         }
         player.openInventory(inventory);
     }
@@ -100,7 +104,6 @@ public abstract class Menu {
         try {
             return buttons[slot];
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -156,6 +159,24 @@ public abstract class Menu {
 
     public void onClose(Player player) {
         MENUS.remove(player.getUniqueId());
+    }
+
+    public int getSize(){ return  size; }
+
+    public void set(boolean b){
+        this.set = b;
+    }
+
+    public boolean isSet(){ return set; }
+
+    public int getSlot(Button button){
+        for (int i =0; i < buttons.length; i++){
+            Button b = buttons[i];
+                if (button.equals(b)) {
+                    return i;
+                }
+        }
+        return -1;
     }
 
     public static Menu remove(UUID uniqueId) {
