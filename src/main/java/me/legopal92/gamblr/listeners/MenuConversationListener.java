@@ -102,7 +102,7 @@ public class MenuConversationListener {
             Player player = (Player) conversationContext.getForWhom();
             NPCDealer dealer = (NPCDealer)CustomEntityType.NPCDEALER.spawn(player.getLocation());
             dealer.setCustomName(ChatColor.translateAlternateColorCodes('&', name));
-            dealer.setGUI(mm);
+            dealer.setGUI(mm, false);
 
             return Prompt.END_OF_CONVERSATION;
         }

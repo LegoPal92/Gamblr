@@ -65,9 +65,12 @@ public class NPCDealer extends EntityVillager {
      * Sets the gui for the Dealer.
      * @param gui
      */
-    public void setGUI(MainMenu gui){
+    public void setGUI(MainMenu gui, boolean init){
         this.gui = gui;
-        Gamblr.getInstance().getDealerConfig().set(this);
+        if (!init){
+            Gamblr.getInstance().getDealerConfig().set(this);
+
+        }
     }
 
     /**

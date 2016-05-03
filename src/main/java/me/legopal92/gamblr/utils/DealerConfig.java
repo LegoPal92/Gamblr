@@ -179,7 +179,7 @@ public class DealerConfig {
             mm.set(true);
             NPCDealer dealer = (NPCDealer)CustomEntityType.NPCDEALER.spawn(l);
             dealer.setCustomName(name);
-            dealer.setGUI(mm);
+            dealer.setGUI(mm, true);
             dealers.add(dealer);
         }
 
